@@ -19,60 +19,54 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>ФИО:</strong>
-                            {{ $employee->full_name }}
+                            {{ $trainer->full_name }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Электронная почта:</strong>
-                            {{ $employee->email }}
+                            {{ $trainer->groups }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Дата рождения:</strong>
-                            {{ $employee->dob }}
+                            {{ $trainer->fitness_education }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Должность:</strong>
-                            {{ $employee->position }}
+                            {{ $trainer->fitness_direction }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Номер телефона:</strong>
-                            {{ $employee->phone }}
+                            {{ $trainer->experience }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Заработная плата:</strong>
-                            {{ $employee->pay }}
+                            {{ $trainer->specialization }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Образование:</strong>
-                            {{ $employee->education }}
+                            {{ $trainer->directions }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Дата начала работы:</strong>
-                            {{ $employee->work_start_date }}
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
-                            @can('employee-edit')
-                                <a class="btn btn-warning" href="{{ route('employees.edit',$employee->id) }}">Изменить</a>
+                        <form action="{{ route('trainers.destroy',$trainer->id) }}" method="POST">
+                            @can('trainer-edit')
+                                <a class="btn btn-warning" href="{{ route('trainers.edit',$trainer->id) }}">Изменить</a>
                             @endcan
 
                             @csrf
                             @method('DELETE')
-                            @can('employee-delete')
+                            @can('trainer-delete')
                                 <button type="submit" class="btn btn-danger">Удалить</button>
                             @endcan
 
@@ -81,7 +75,7 @@
                 </div></td>
             <td>
                 <strong>Фото:</strong>
-                <img src="{{url('storage/image/'.$employee->img)}}" style="max-width: 400px; max-height: 400px" class="img-thumbnail ">
+                <img src="{{url('storage/image/'.$trainer->id)}}" style="max-width: 400px; max-height: 400px" class="img-thumbnail ">
             </td>
         </tr>
         </tbody>

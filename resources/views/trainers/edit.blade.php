@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Employee</h2>
+                <h2>Редактирование тренера</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('employees.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('trainers.index') }}"> Назад</a>
             </div>
         </div>
     </div>
@@ -25,57 +25,51 @@
         </div>
     @endif
 
-    <form action="{{ route('employees.update',$employee->id) }}"  method="POST" enctype="multipart/form-data">
+    <form action="{{ route('trainers.update',$trainer->id) }}"  method="POST">
         @csrf
         @method('PUT')
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Full name:</strong>
-                    <input type="text" name="full_name" class="form-control" value="{{$employee->full_name}}" placeholder="Full name" required>
+                    <strong>ФИО</strong>
+                    <input type="text" name="full_name" class="form-control" value="{{$trainer->full_name}}" placeholder="ФИО" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Date of birth:</strong>
-                    <input type="date" name="dob" class="form-control" value="{{$employee->dob}}" required>
+                    <strong>Группы</strong>
+                    <input type="text" name="groups" class="form-control" value="{{$trainer->groups}}" placeholder="Группы" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Position:</strong>
-                    <input type="text" name="position" class="form-control" placeholder="Position" value="{{$employee->position}}" required>
+                    <strong>Фитнес-образование</strong>
+                    <input type="text" name="fitness_education" class="form-control" value="{{$trainer->fitness_education}}" placeholder="Фитнес-образование" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Phone number:</strong>
-                    <input type="tel" name="phone" placeholder="79001234567" class="form-control" value="{{$employee->phone}}" pattern="\7\{0,1}9[0-9]{2}{0,1}\d{3}\d{2}\d{2}" required>
+                    <strong>Фитнес-направления</strong>
+                    <input type="text" name="fitness_direction" class="form-control" value="{{$trainer->fitness_direction}}" placeholder="Фитнес-направления" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Pay:</strong>
-                    <input type="number" name="pay" class="form-control" value="{{$employee->pay}}" placeholder="Pay, &#8381" min="0" required>
+                    <strong>Опыт работы (полных лет)</strong>
+                    <input type="number" name="experience" class="form-control" value="{{$trainer->experience}}" placeholder="Опыт работы" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Education:</strong>
-                    <input type="text" name="education" class="form-control" value="{{$employee->education}}" placeholder="Education" required>
+                    <strong>Специализация</strong>
+                    <input type="text" name="specialization" class="form-control" value="{{$trainer->specialization}}" placeholder="Специализация" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Img</strong>
-                    <input type="file" name="img" class="form-control-file">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Work start date:</strong>
-                    <input type="date" name="work_start_date" value="{{$employee->work_start_date}}" class="form-control"required>
+                    <strong>Направления</strong>
+                    <input type="text" name="directions" class="form-control" value="{{$trainer->directions}}" placeholder="Направления" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

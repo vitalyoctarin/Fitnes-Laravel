@@ -8,7 +8,7 @@
                 <h2>Тренера</h2>
             </div>
             <div class="pull-right mb-2">
-                @can('trainers-create')
+                @can('trainer-create')
                 <a class="btn btn-success" href="{{ route('trainers.create') }}">Добавить нового тренера</a>
                 @endcan
             </div>
@@ -35,16 +35,16 @@
 	    @foreach ($trainers as $trainer)
 	    <tr>
 	        <td>{{ $trainer->id }}</td>
-	        <td>{{ $employees[($trainer->id)-1]->full_name }}</td>
+	        <td>{{ $trainer->full_name }}</td>
 	        <td>{{ $trainer->groups }}</td>
             <td>{{ $trainer->specialization }}</td>
             <td>{{ $trainer->directions }}</td>
 	        <td>
                 <form action="{{ route('trainers.destroy',$trainer->id) }}" method="POST">
                     <div class="d-flex justify-content-around">
-                        <a class="btn btn-primary" href="{{ route('employees.show',$trainer->id) }}">Карточка</a>
+                        <a class="btn btn-primary" href="{{ route('trainers.show',$trainer->id) }}">Карточка</a>
                         @can('trainer-edit')
-                        <a class="btn btn-warning" href="{{ route('employees.edit',$trainer->id) }}">Изменить</a>
+                        <a class="btn btn-warning" href="{{ route('trainers.edit',$trainer->id) }}">Изменить</a>
                         @endcan
 
                         @csrf

@@ -31,6 +31,10 @@ class PermissionTableSeeder extends Seeder
            'trainer-create',
            'trainer-edit',
            'trainer-delete',
+           'group-list',
+           'group-create',
+           'group-edit',
+           'group-delete',
 
         ];
 

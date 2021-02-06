@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TrainerController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('trainers', TrainerController::class);
+    Route::resource('groups', GroupController::class);
 });

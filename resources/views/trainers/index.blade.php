@@ -30,18 +30,18 @@
             <th>Группы</th>
             <th>Специализация</th>
             <th>Направления</th>
-            <th>Действия</th>
+            <th style="width: 350px">Действия</th>
         </tr>
 	    @foreach ($trainers as $trainer)
 	    <tr>
 	        <td>{{ $trainer->id }}</td>
-	        <td>{{ $trainer->full_name }}</td>
+	        <td>{{ $trainer->trainer_name }}</td>
 	        <td>{{ $trainer->groups }}</td>
             <td>{{ $trainer->specialization }}</td>
             <td>{{ $trainer->directions }}</td>
 	        <td>
                 <form action="{{ route('trainers.destroy',$trainer->id) }}" method="POST">
-                    <div class="d-flex justify-content-around">
+                    <div class="d-flex justify-content-between">
                         <a class="btn btn-primary" href="{{ route('trainers.show',$trainer->id) }}">Карточка</a>
                         @can('trainer-edit')
                         <a class="btn btn-warning" href="{{ route('trainers.edit',$trainer->id) }}">Изменить</a>

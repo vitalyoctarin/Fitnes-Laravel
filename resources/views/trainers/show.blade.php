@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Карточка работника</h2>
+                <h2>Карточка тренера</h2>
             </div>
         </div>
     </div>
@@ -19,12 +19,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>ФИО:</strong>
-                            {{ $trainer->full_name }}
+                            {{ $trainer->trainer_name }}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Электронная почта:</strong>
+                            <strong>Группы:</strong>
                             {{ $trainer->groups }}
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                 </div></td>
             <td>
                 <strong>Фото:</strong>
-                <img src="{{url('storage/image/'.$trainer->id)}}" style="max-width: 400px; max-height: 400px" class="img-thumbnail ">
+                <img src="{{url('storage/image/'.$image->image)}}" style="max-width: 400px; max-height: 400px" class="img-thumbnail ml-2">
             </td>
         </tr>
         </tbody>

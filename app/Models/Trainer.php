@@ -12,10 +12,11 @@ class Trainer extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'full_name',
+        'employee_id',
+        'trainer_name',
         'groups',
         'fitness_education',
-        'fitness_direction',
+        'fitness_directions',
         'experience',
         'specialization',
         'directions'

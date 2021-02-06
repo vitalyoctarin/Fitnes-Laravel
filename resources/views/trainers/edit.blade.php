@@ -33,7 +33,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>ФИО</strong>
-                    <input type="text" name="full_name" class="form-control" value="{{$trainer->full_name}}" placeholder="ФИО" required>
+                    <input type="text" name="trainer_name" class="form-control" value="{{$trainer->full_name}}" placeholder="ФИО" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

@@ -31,16 +31,27 @@
 
 
          <div class="row">
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>ФИО</strong>
-		            <input type="text" name="full_name" class="form-control" placeholder="ФИО" required>
-		        </div>
-		    </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Работник</strong>
+                     <select class="form-control" onchange="document.getElementById('trainer_name').value = document.querySelector('#employee_'+value).textContent" name="employee_id">
+                         <option selected> - </option>
+                         @foreach($employees as $employee)
+                             <option id="employee_{{$employee->id}}" value={{$employee->id}}>{{$employee->full_name}}</option>
+                         @endforeach
+                     </select>
+                 </div>
+             </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Группы</strong>
                      <input type="text" name="groups" class="form-control" placeholder="Группы" required>
+                 </div>
+             </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>ФИО</strong>
+                     <input type="text" name="trainer_name" id="trainer_name" class="form-control" readonly placeholder="ФИО" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
@@ -52,7 +63,7 @@
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Фитнес-направления</strong>
-                     <input type="text" name="fitness_direction" class="form-control" placeholder="Фитнес-направления" required>
+                     <input type="text" name="fitness_directions" class="form-control" placeholder="Фитнес-направления" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
@@ -74,7 +85,7 @@
                  </div>
              </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
+		            <button type="submit" class="btn btn-primary">Создать</button>
 		    </div>
 		</div>
 

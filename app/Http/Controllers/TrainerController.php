@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\Image;
 use App\Models\Trainer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -23,33 +25,36 @@ class TrainerController extends Controller
 
     public function index()
     {
-        $trainers = Trainer::latest()->paginate(10);
+        $trainers = Trainer::paginate(10);
         return view('trainers.index',compact('trainers'));
     }
 
 
     public function create()
     {
-        return view('trainers.create');
+        $employees = Employee::all();
+        return view('trainers.create',compact('employees'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         request()->validate([
-            'full_name'=>['required','string'],
+            'trainer_name'=>'required|string',
+            'employee_id' => 'required',
             'groups'=>['required','integer'],
             'fitness_education'=>['required','integer'],
-            'fitness_direction'=>['required','integer'],
+            'fitness_directions'=>['required','integer'],
             'experience'=>['required','integer'],
             'specialization'=>['required','integer'],
             'directions'=>['required','integer']
         ]);
 
         Trainer::create([
-            'full_name' => $request['full_name'],
+            'trainer_name' => $request['trainer_name'],
+            'employee_id' => $request['employee_id'],
             'groups' => $request['groups'],
             'fitness_education'=> $request['fitness_education'],
-            'fitness_direction'=> $request['fitness_direction'],
+            'fitness_directions'=> $request['fitness_directions'],
             'experience'=> $request['experience'],
             'specialization'=> $request['specialization'],
             'directions'=> $request['directions']
@@ -61,7 +66,8 @@ class TrainerController extends Controller
 
     public function show(Trainer $trainer)
     {
-        return view('trainers.show',compact('trainer'));
+        $image = Image::where('employee_id','=',$trainer->employee_id)->first();
+        return view('trainers.show',compact('trainer','image'));
     }
 
     public function edit(Trainer $trainer)
@@ -72,19 +78,19 @@ class TrainerController extends Controller
     public function update(Request $request, Trainer $trainer)
     {
         $this->validate($request,[
-            'full_name'=>['required'],
+            'trainer_name'=>'required|string',
             'groups'=>['required','integer'],
             'fitness_education'=>['required','integer'],
-            'fitness_direction'=>['required','integer'],
+            'fitness_directions'=>['required','integer'],
             'experience'=>['required','integer'],
             'specialization'=>['required','integer'],
             'directions'=>['required','integer']
         ]);
 
-        $trainer->full_name = $request['full_name'];
+        $trainer->trainer_name = $request['trainer_name'];
         $trainer->groups = $request['groups'];
         $trainer->fitness_education = $request['fitness_education'];
-        $trainer->fitness_direction = $request['fitness_direction'];
+        $trainer->fitness_directions = $request['fitness_directions'];
         $trainer->experience = $request['experience'];
         $trainer->specialization = $request['specialization'];
         $trainer->directions = $request['directions'];

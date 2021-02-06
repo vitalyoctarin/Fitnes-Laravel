@@ -21,7 +21,6 @@ class Employee extends Model
         'position',
         'phone',
         'pay',
-        'img',
         'education',
         'work_start_date'
     ];

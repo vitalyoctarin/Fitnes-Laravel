@@ -28,9 +28,9 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $employees = Employee::all();
+        $data = User::orderBy('id','DESC')->paginate(10);
+        return view('users.index',compact('data','employees'));
     }
 
     /**
@@ -56,7 +56,6 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'login' => 'required',
-            'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
             'employee_id'=>'required',
@@ -78,11 +77,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $user = User::find($id);
-        return view('users.show',compact('user'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -110,7 +104,6 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'login' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);

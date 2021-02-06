@@ -7,6 +7,9 @@
             <div class="pull-left">
                 <h2>Карточка работника</h2>
             </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('employees.index') }}"> Назад</a>
+            </div>
         </div>
     </div>
 
@@ -81,7 +84,7 @@
                 </div></td>
             <td>
                 <strong>Фото:</strong>
-                <img src="{{url('storage/image/'.$employee->img)}}" style="max-width: 400px; max-height: 400px" class="img-thumbnail ">
+                <img src="{{url('storage/image/'.$image->image)}}" style="max-width: 400px; max-height: 400px" class="img-thumbnail ">
             </td>
         </tr>
         </tbody>

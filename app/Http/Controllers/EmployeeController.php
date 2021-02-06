@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -60,19 +61,22 @@ class EmployeeController extends Controller
         }
         else
         {
-            $fileNameToStore = 'noimage.png';
+            $fileNameToStore = 'noimage.jpg';
         }
 
-
-        Employee::create([
+        $employee = Employee::create([
             'full_name' => $request['full_name'],
             'dob' => $request['dob'],
             'position' =>$request['position'],
             'phone' => $request['phone'],
             'pay' => $request['pay'],
-            'img' => $fileNameToStore,
             'education' => $request['education'],
             'work_start_date' => $request['work_start_date'],
+        ]);
+
+        Image::create([
+            'employee_id' => $employee->id,
+            'image' => $fileNameToStore
         ]);
 
         return redirect()->route('employees.index')
@@ -81,7 +85,8 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        return view('employees.show',compact('employee'));
+        $image = DB::table('images')->select('image')->where('employee_id','=',$employee->id)->first();
+        return view('employees.show',compact('employee','image'));
     }
 
     public function edit(Employee $employee)
@@ -96,7 +101,7 @@ class EmployeeController extends Controller
             'dob' => ['required','date'],
             'position' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'integer'],
-            'pay' => ['required', 'integer'],
+            'pay' => ['required'],
             'img' => ['image','nullable','mimes:jpg, jpeg, png, bmp, gif, svg'],
             'education' => ['required', 'string', 'max:255'],
             'work_start_date' => ['required','date'],
@@ -110,7 +115,7 @@ class EmployeeController extends Controller
             $fileNameToStore = $filename . '_'.time().'.'.$extension;
             $path = $request->file('img')->storeAs('public/image',$fileNameToStore);
 
-            $employee->img = $fileNameToStore;
+            DB::table('images')->where('employee_id', '=',$employee->id)->update(['image' => $fileNameToStore]);
         }
 
         $employee->dob = $request['dob'];

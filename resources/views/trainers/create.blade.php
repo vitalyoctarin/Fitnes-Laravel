@@ -48,7 +48,7 @@
                      <input type="text" name="groups" class="form-control" placeholder="Группы" required>
                  </div>
              </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="col-xs-12 col-sm-12 col-md-12" hidden>
                  <div class="form-group">
                      <strong>ФИО</strong>
                      <input type="text" name="trainer_name" id="trainer_name" class="form-control" readonly placeholder="ФИО" required>

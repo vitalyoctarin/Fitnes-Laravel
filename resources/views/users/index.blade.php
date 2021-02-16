@@ -1,6 +1,4 @@
 @extends('layouts.app')
-
-
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -13,13 +11,11 @@
     </div>
 </div>
 
-
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
   <p>{{ $message }}</p>
 </div>
 @endif
-
 
 <table class="table table-bordered">
  <tr>
@@ -52,7 +48,6 @@
   </tr>
  @endforeach
 </table>
-
 
 {!! $data->links("pagination::bootstrap-4") !!}
 @endsection

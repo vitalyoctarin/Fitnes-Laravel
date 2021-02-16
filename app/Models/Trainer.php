@@ -14,7 +14,6 @@ class Trainer extends Model
     protected $fillable = [
         'employee_id',
         'trainer_name',
-        'groups',
         'fitness_education',
         'fitness_directions',
         'experience',

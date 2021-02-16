@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -13,7 +12,6 @@
     </div>
 </div>
 
-
 @if (count($errors) > 0)
   <div class="alert alert-danger">
     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -25,20 +23,17 @@
   </div>
 @endif
 
-
-
 {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Логин:</strong>
-            {!! Form::text('login', null, array('placeholder' => 'Login','class' => 'form-control')) !!}
+            {!! Form::text('login', null, array('placeholder' => 'Логин','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Работник:</strong>
-{{--            <input type="number" name="employee_id" class="form-control" placeholder="Employee ID" max={{$employee_id}}>--}}
             <select class="form-control" name="employee_id">
                 @foreach($employees as $employee)
                 <option  value={{$employee->id}}>{{$employee->id}} - {{$employee->full_name}}</option>
@@ -49,13 +44,13 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Пароль:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+            {!! Form::password('password', array('placeholder' => 'Введите пароль','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Повторите пароль:</strong>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+            {!! Form::password('confirm-password', array('placeholder' => 'Повторите пароль','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">

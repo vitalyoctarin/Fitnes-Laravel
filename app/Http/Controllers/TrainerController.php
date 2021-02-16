@@ -41,7 +41,6 @@ class TrainerController extends Controller
         request()->validate([
             'trainer_name'=>'required|string',
             'employee_id' => 'required',
-            'groups'=>['required','integer'],
             'fitness_education'=>['required','integer'],
             'fitness_directions'=>['required','integer'],
             'experience'=>['required','integer'],
@@ -52,7 +51,6 @@ class TrainerController extends Controller
         Trainer::create([
             'trainer_name' => $request['trainer_name'],
             'employee_id' => $request['employee_id'],
-            'groups' => $request['groups'],
             'fitness_education'=> $request['fitness_education'],
             'fitness_directions'=> $request['fitness_directions'],
             'experience'=> $request['experience'],
@@ -79,7 +77,6 @@ class TrainerController extends Controller
     {
         $this->validate($request,[
             'trainer_name'=>'required|string',
-            'groups'=>['required','integer'],
             'fitness_education'=>['required','integer'],
             'fitness_directions'=>['required','integer'],
             'experience'=>['required','integer'],
@@ -88,7 +85,6 @@ class TrainerController extends Controller
         ]);
 
         $trainer->trainer_name = $request['trainer_name'];
-        $trainer->groups = $request['groups'];
         $trainer->fitness_education = $request['fitness_education'];
         $trainer->fitness_directions = $request['fitness_directions'];
         $trainer->experience = $request['experience'];

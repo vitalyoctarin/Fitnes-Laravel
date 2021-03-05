@@ -66,6 +66,12 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>Дата рождения:</strong>
+                                    <input type="date" name="dob" id="dob" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>Услуга</strong>
                                     <input type="text" name="service_id" class="form-control" value="1" readonly required>
                                 </div>

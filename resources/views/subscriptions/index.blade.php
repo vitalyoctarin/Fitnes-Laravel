@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Клиенты</h2>
+                <h2>Абонементы</h2>
             </div>
             <div class="pull-right mb-2">
-                @can('client-create')
-                    <a class="btn btn-success" href="{{ route('clients.create') }}">Добавить нового клиента</a>
+                @can('subscription-create')
+                    <a class="btn btn-success" href="{{ route('subscriptions.create') }}">Добавить новый абонемент</a>
                 @endcan
             </div>
         </div>
@@ -25,57 +25,42 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>ID</th>
-            <th>ФИО</th>
-            <th>Дата рождения</th>
-            <th>Услуга</th>
-            <th>Номер телефона</th>
-            <th>Группа</th>
-            <th>ID заявки</th>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Скидка (%)</th>
+            <th>Кол-во занятий</th>
+            <th>Id услуги</th>
             <th style="width: 350px">Действия</th>
         </tr>
-	    @foreach ($clients as $client)
+	    @foreach ($subscriptions as $subscription)
 	    <tr>
-	        <td>{{ $client->id }}</td>
-	        <td>{{ $client->full_name }}</td>
-            <td>{{ $client->dob }}</td>
+	        <td>{{ $subscription->id }}</td>
+	        <td>{{ $subscription->subscription_name }}</td>
+            <td>{{ $subscription->discount }}</td>
+            <td>{{ $subscription->count_training }}</td>
             <td>
-                @foreach($services as $service )
-                    @if($service->id == $client->subscription_name)
-                        @foreach($subcategories as $subcategory)
-                           @if($subcategory->id == $service->subcategories_id)
-                            {{$subcategory->subcategory_name}}
-                           @endif
-                        @endforeach
+                @foreach ($services as $service)
+                    @if($service->id == $subscription->service_id)
+                        <a href="{{route('services.show',$service->id)}}">{{$subscription->service_id}}</a>
                     @endif
                 @endforeach
             </td>
-            <td>{{ $client->phone_number }}</td>
             <td>
-                @foreach($groups as $group)
-                    @if($group->id == $client->group_id)
-                        {{$group->group_name}}
-                    @endif
-                @endforeach
-            </td>
-            <td>{{ $client->application_id }}</td>
-	        <td>
-                <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
+                <form action="{{ route('subscriptions.destroy',$subscription->id) }}" method="POST">
                     <div class="d-flex justify-content-between">
-                        <a class="btn btn-primary" href="{{ route('clients.show',$client->id) }}">Подробнее</a>
-                        @can('client-edit')
-                        <a class="btn btn-warning" href="{{ route('clients.edit',$client->id) }}">Изменить</a>
+                        <a class="btn btn-primary" href="{{ route('subscriptions.show',$subscription->id) }}">Подробнее</a>
+                        @can('service-edit')
+                        <a class="btn btn-warning" href="{{ route('subscriptions.edit',$subscription->id) }}">Изменить</a>
                         @endcan
 
                         @csrf
                         @method('DELETE')
-                        @can('client-delete')
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        @can('service-delete')
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$subscription->id}}">
                                 Удалить
                             </button>
 
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal{{$subscription->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -102,6 +87,6 @@
 	    @endforeach
     </table>
 
-    <div class="d-flex justify-content-center">{{$clients->links("pagination::bootstrap-4")}}</div>
+    <div class="d-flex justify-content-center">{{$subscriptions->links("pagination::bootstrap-4")}}</div>
 
 @endsection

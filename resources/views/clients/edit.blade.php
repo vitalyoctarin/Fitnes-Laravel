@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Редактирование тренера</h2>
+                <h2>Редактирование клиента</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('trainers.index') }}"> Назад</a>
+                <a class="btn btn-primary" href="{{ route('clients.index') }}"> Назад</a>
             </div>
         </div>
     </div>
@@ -25,49 +25,48 @@
         </div>
     @endif
 
-    <form action="{{ route('trainers.update',$trainer->id) }}"  method="POST">
+    <form action="{{ route('clients.update',$client->id) }}"  method="POST">
         @csrf
         @method('PUT')
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>ФИО</strong>
-                    <input type="text" name="trainer_name" class="form-control" value="{{$trainer->full_name}}" placeholder="ФИО" required>
+                    <strong>ФИО:</strong>
+                    <input type="text" name="full_name" class="form-control" value="{{ $client->full_name }}" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Фитнес-образование</strong>
-                    <input type="text" name="fitness_education" class="form-control" value="{{$trainer->fitness_education}}" placeholder="Фитнес-образование" required>
+                    <strong>Дата рождения:</strong>
+                    <input type="date" name="dob" class="form-control" value="{{ $client->dob }}" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Фитнес-направления</strong>
-                    <input type="text" name="fitness_direction" class="form-control" value="{{$trainer->fitness_direction}}" placeholder="Фитнес-направления" required>
+                    <strong>Услуга:</strong>
+                    <input type="text" name="subscription_name" class="form-control" value="{{ $client->subscription_name }}" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Опыт работы (полных лет)</strong>
-                    <input type="number" name="experience" class="form-control" value="{{$trainer->experience}}" placeholder="Опыт работы" required>
+                    <strong>Номер телефона:</strong>
+                    <input type="tel" name="phone_number" class="form-control" pattern="\7\{0,1}9[0-9]{2}{0,1}\d{3}\d{2}\d{2}" value="{{ $client->phone_number }}" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Специализация</strong>
-                    <input type="text" name="specialization" class="form-control" value="{{$trainer->specialization}}" placeholder="Специализация" required>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Направления</strong>
-                    <input type="text" name="directions" class="form-control" value="{{$trainer->directions}}" placeholder="Направления" required>
+                    <strong>Группа</strong>
+                    <select class="form-control" name="group_id">
+                        <option selected> - </option>
+                        @foreach($groups as $group)
+                            <option value={{$group->id}}>{{$group->group_name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Изменить</button>
             </div>
         </div>
     </form>

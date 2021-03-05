@@ -33,37 +33,37 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>ФИО:</strong>
-		            <input type="text" name="full_name" class="form-control" value="{{old('full_name')}}" placeholder="Full name" required>
+		            <input type="text" name="full_name" class="form-control" placeholder="ФИО" required>
 		        </div>
 		    </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Дата рождения:</strong>
-                     <input type="date" name="dob" class="form-control" value="{{old('dob')}}" required>
+                     <input type="date" name="dob" class="form-control" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Должность:</strong>
-                     <input type="text" name="position" class="form-control" placeholder="Position" value="{{old('position')}}" required>
+                     <input type="text" name="position" class="form-control" placeholder="Должность" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Номер телефона:</strong>
-                     <input type="tel" name="phone" placeholder="79001234567" class="form-control" value="{{old('phone')}}" pattern="\7\{0,1}9[0-9]{2}{0,1}\d{3}\d{2}\d{2}" required>
+                     <input type="tel" name="phone" placeholder="79001234567" class="form-control" pattern="\7\{0,1}9[0-9]{2}{0,1}\d{3}\d{2}\d{2}" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Зарплата:</strong>
-                     <input type="number" name="pay" class="form-control" value="{{old('pay')}}" placeholder="Pay, &#8381" min="0" required>
+                     <input type="number" name="pay" class="form-control" placeholder="Зарплата, &#8381" min="0" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Образование:</strong>
-                     <input type="text" name="education" class="form-control" value="{{old('education')}}" placeholder="Education" required>
+                     <input type="text" name="education" class="form-control" placeholder="Образование" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
@@ -75,7 +75,7 @@
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                      <strong>Дата начала работы:</strong>
-                     <input type="date" name="work_start_date" value="{{old('work_start_date')}}" class="form-control"required>
+                     <input type="date" name="work_start_date" class="form-control" required>
                  </div>
              </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">

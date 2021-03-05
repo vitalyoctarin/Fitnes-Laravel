@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Клиенты</h2>
+                <h2>Список используемых услуг</h2>
             </div>
             <div class="pull-right mb-2">
-                @can('client-create')
-                    <a class="btn btn-success" href="{{ route('clients.create') }}">Добавить нового клиента</a>
+                @can('services_list-create')
+                    <a class="btn btn-success" href="{{ route('services_lists.create') }}">Добавить</a>
                 @endcan
             </div>
         </div>
@@ -24,58 +24,63 @@
 
 
     <table class="table table-bordered">
-        <tr>
-            <th>ID</th>
-            <th>ФИО</th>
-            <th>Дата рождения</th>
+        <tr style="white-space: nowrap;">
+            <th>Id</th>
+            <th>Клиент</th>
             <th>Услуга</th>
-            <th>Номер телефона</th>
+            <th>Стоимость</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
             <th>Группа</th>
-            <th>ID заявки</th>
-            <th style="width: 350px">Действия</th>
+            <th>Действия</th>
         </tr>
-	    @foreach ($clients as $client)
-	    <tr>
-	        <td>{{ $client->id }}</td>
-	        <td>{{ $client->full_name }}</td>
-            <td>{{ $client->dob }}</td>
+	    @foreach ($services_lists as $services_list)
+	    <tr style="white-space: nowrap;">
+	        <td>{{ $services_list->id }}</td>
+	        <td>
+                @foreach($clients as $client)
+                    @if($services_list->client_id == $client->id)
+                        {{$client->full_name}}
+                    @endif
+                @endforeach
+            </td>
             <td>
-                @foreach($services as $service )
-                    @if($service->id == $client->subscription_name)
+                @foreach ($services as $service)
+                    @if($services_list->service_id == $service->id)
                         @foreach($subcategories as $subcategory)
-                           @if($subcategory->id == $service->subcategories_id)
-                            {{$subcategory->subcategory_name}}
-                           @endif
+                            @if($service->subcategories_id == $subcategory->id)
+                                {{$subcategory->subcategory_name}}
+                            @endif
                         @endforeach
                     @endif
                 @endforeach
             </td>
-            <td>{{ $client->phone_number }}</td>
+            <td>{{ $services_list->cost }} &#8381</td>
+            <td>{{ $services_list->start_date }}</td>
+            <td>{{ $services_list->end_date }}</td>
             <td>
                 @foreach($groups as $group)
-                    @if($group->id == $client->group_id)
+                    @if($services_list->group_id == $group->id)
                         {{$group->group_name}}
                     @endif
                 @endforeach
             </td>
-            <td>{{ $client->application_id }}</td>
 	        <td>
-                <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
+                <form action="{{ route('services_lists.destroy',$services_list->id) }}" method="POST">
                     <div class="d-flex justify-content-between">
-                        <a class="btn btn-primary" href="{{ route('clients.show',$client->id) }}">Подробнее</a>
-                        @can('client-edit')
-                        <a class="btn btn-warning" href="{{ route('clients.edit',$client->id) }}">Изменить</a>
+                        <a class="btn btn-primary mr-1" href="{{ route('services_lists.show',$services_list->id) }}">Подробнее</a>
+                        @can('services_list-edit')
+                        <a class="btn btn-warning ml-1 mr-1" href="{{ route('services_lists.edit',$services_list->id) }}">Изменить</a>
                         @endcan
 
                         @csrf
                         @method('DELETE')
-                        @can('client-delete')
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        @can('services_list-delete')
+                            <button type="button" class="btn btn-danger ml-1" data-bs-toggle="modal" data-bs-target="#exampleModal{{$services_list->id}}">
                                 Удалить
                             </button>
 
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal{{$services_list->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -102,6 +107,6 @@
 	    @endforeach
     </table>
 
-    <div class="d-flex justify-content-center">{{$clients->links("pagination::bootstrap-4")}}</div>
+    <div class="d-flex justify-content-center">{{$services_lists->links("pagination::bootstrap-4")}}</div>
 
 @endsection

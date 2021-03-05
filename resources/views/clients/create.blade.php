@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Добавить нового тренера</h2>
+                <h2>Создание нового клиента</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('trainers.index') }}"> Назад</a>
+                <a class="btn btn-primary" href="{{ route('clients.index') }}"> Список всех клиентов</a>
             </div>
         </div>
     </div>
@@ -26,56 +26,52 @@
     @endif
 
 
-    <form action="{{ route('trainers.store') }}" method="POST">
+    <form action="{{ route('clients.store') }}" method="POST">
     	@csrf
-
 
          <div class="row">
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
-                     <strong>Работник</strong>
-                     <select class="form-control" onchange="document.getElementById('trainer_name').value = document.querySelector('#employee_'+value).textContent" name="employee_id">
-                         <option selected> - </option>
-                         @foreach($employees as $employee)
-                             <option id="employee_{{$employee->id}}" value={{$employee->id}}>{{$employee->full_name}}</option>
+                     <strong>ФИО:</strong>
+                     <input type="text" name="full_name" class="form-control" required>
+                 </div>
+             </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Дата рождения:</strong>
+                     <input type="date" name="dob" class="form-control" required>
+                 </div>
+             </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Услуга:</strong>
+                     <select class="form-control" name="subscription_name" required>
+                         <option selected value="{{null}}"> - </option>
+                         @foreach($services as $service)
+                             @foreach($subcategories as $subcategory)
+                                 @if($subcategory->id == $service->subcategories_id)
+                                     <option value={{$service->id}}>{{$subcategory->subcategory_name}}</option>
+                                 @endif
+                             @endforeach
                          @endforeach
                      </select>
                  </div>
              </div>
-             <div class="col-xs-12 col-sm-12 col-md-12" hidden>
+             <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
-                     <strong>ФИО</strong>
-                     <input type="text" name="trainer_name" id="trainer_name" class="form-control" readonly placeholder="ФИО" required>
+                     <strong>Номер телефона:</strong>
+                     <input type="tel" name="phone_number" class="form-control" pattern="\7\{0,1}9[0-9]{2}{0,1}\d{3}\d{2}\d{2}" required>
                  </div>
              </div>
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
-                     <strong>Фитнес-образование</strong>
-                     <input type="text" name="fitness_education" class="form-control" placeholder="Фитнес-образование" required>
-                 </div>
-             </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
-                 <div class="form-group">
-                     <strong>Фитнес-направления</strong>
-                     <input type="text" name="fitness_directions" class="form-control" placeholder="Фитнес-направления" required>
-                 </div>
-             </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
-                 <div class="form-group">
-                     <strong>Опыт работы (полных лет)</strong>
-                     <input type="number" name="experience" class="form-control" placeholder="Опыт работы" required>
-                 </div>
-             </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
-                 <div class="form-group">
-                     <strong>Специализация</strong>
-                     <input type="text" name="specialization" class="form-control" placeholder="Специализация" required>
-                 </div>
-             </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
-                 <div class="form-group">
-                     <strong>Направления</strong>
-                     <input type="text" name="directions" class="form-control" placeholder="Направления" required>
+                     <strong>Группа</strong>
+                     <select class="form-control" name="group_id" required>
+                         <option selected value="{{null}}"> - </option>
+                         @foreach($groups as $group)
+                             <option value={{$group->id}}>{{$group->group_name}}</option>
+                         @endforeach
+                     </select>
                  </div>
              </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -91,7 +91,7 @@ class EmployeeController extends Controller
 
     public function update(Request $request, Employee $employee)
     {
-        $this->validate($request,[
+        request()->validate($request,[
             'full_name' => ['required', 'string', 'max:255'],
             'dob' => ['required','date'],
             'position' => ['required', 'string', 'max:255'],
